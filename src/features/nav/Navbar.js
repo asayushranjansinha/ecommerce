@@ -68,7 +68,7 @@ export default function Navbar({ children }) {
                     <div className="ml-4 flex items-center md:ml-6">
                       <Link
                         type="button"
-                        to='/cart'
+                        to="/cart"
                         className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">Shopping Card Icon</span>
@@ -181,7 +181,7 @@ export default function Navbar({ children }) {
                     </div>
                     <Link
                       type="button"
-                      to='/cart'
+                      to="/cart"
                       className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <span className="sr-only">Shopping Cart Icon</span>
@@ -214,9 +214,11 @@ export default function Navbar({ children }) {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Ecommerce
-            </h1>
+            <Link to='/'>
+              <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+                Ecommerce
+              </h1>
+            </Link>
           </div>
         </header>
         <main>
