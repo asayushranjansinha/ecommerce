@@ -2340,6 +2340,36 @@
       "password": "Amitabh@294",
       "id": 1
     },
-    
-   ]
+    {
+      "email": "demo@gmail.com",
+      "password": "Ayush@294",
+      "id": 2
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "Ayush@294",
+      "id": 3
+    }
+  ],
+  "cart": [
+    {
+      "id": 2,
+      "title": "iPhone X",
+      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+      "price": 899,
+      "discountPercentage": 17.94,
+      "rating": 4.44,
+      "stock": 34,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/2/1.jpg",
+        "https://i.dummyjson.com/data/products/2/2.jpg",
+        "https://i.dummyjson.com/data/products/2/3.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+      ],
+      "quantity": 1
+    }
+  ]
 }
