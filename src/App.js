@@ -23,20 +23,20 @@ const router = createBrowserRouter([
     path: "login",
     element: <LoginPage />,
   },
-  {  
+  {
     path: "signup",
     element: <SignupPage />,
   },
-  {  
+  {
     path: "cart",
     element: <Cart />,
   },
-  {  
+  {
     path: "checkout",
     element: <Checkout />,
   },
-  {  
-    path: "product-detail",
+  {
+    path: "product-detail/:id",
     element: <ProductDetailPage />,
   },
 ]);
