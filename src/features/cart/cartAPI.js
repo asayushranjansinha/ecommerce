@@ -2,7 +2,7 @@
 export function fetchItemsByUserId(userId) {
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:8080/cart?user=" + userId);
-    const data = response.json();
+    const data = await response.json();
     resolve({ data });
   });
 }
@@ -36,7 +36,7 @@ export function updateCart(update) {
 // Api to delete item from cart
 export function deleteItemFromCart(itemId) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/cart/" + itemId, {
+    await fetch("http://localhost:8080/cart/" + itemId, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     });

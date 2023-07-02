@@ -19,7 +19,6 @@ export function checkUser(loginInfo) {
 
     const response = await fetch("http://localhost:8080/users?email=" + email);
     const data = await response.json();
-console.log(data)
     if (data.length === 0) {
       reject({ message: "User not found" });
     } else if (password === data[0].password) {
