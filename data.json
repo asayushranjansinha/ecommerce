@@ -2366,13 +2366,40 @@
       "id": 2,
       "addresses": [
         {
-          "name": "asfdaf",
-          "email": "sadfasf",
-          "phone": "asdfsdf",
-          "street": "safdsadf",
-          "city": "asddfsdf",
-          "state": "asdfsdf",
-          "pinCode": "sadfsdfsdf"
+          "name": "Ayush Ranjan Sinha",
+          "email": "ayushranjan1277@gmail.com",
+          "phone": "436345435345345",
+          "street": "QNO 294,SECTOR-3B",
+          "city": "Bokaro",
+          "state": "Jharkhand",
+          "pinCode": "827003"
+        },
+        {
+          "name": "Ayush Ranjan Sinha",
+          "email": "ayushranjan1277@gmail.com",
+          "phone": "436345435345345",
+          "street": "QNO 294,SECTOR-3B",
+          "city": "Bokaro",
+          "state": "Jharkhand",
+          "pinCode": "827003"
+        },
+        {
+          "name": "Rani Kumari",
+          "email": "ayushranjan1277@gmail.com",
+          "city": "Bokaro",
+          "state": "Jharkhand",
+          "pinCode": "827003",
+          "phone": "436345435345345",
+          "street": "QNO 294,SECTOR-3B"
+        },
+        {
+          "name": "Ayush Ranjan",
+          "email": "ayushranjan1277@gmail.com",
+          "phone": "79876464654646",
+          "street": "QNO 294,SECTOR-3B",
+          "city": "Bokaro",
+          "state": "Jharkhand",
+          "pinCode": "827003"
         },
         {
           "name": "Ayush Ranjan Sinha",
@@ -2386,7 +2413,28 @@
       ]
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "title": "HP Pavilion 15-DK1056WM",
+      "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+      "price": 1099,
+      "discountPercentage": 6.18,
+      "rating": 4.43,
+      "stock": 89,
+      "brand": "HP Pavilion",
+      "category": "laptops",
+      "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
+      "images": [
+        "https://i.dummyjson.com/data/products/10/1.jpg",
+        "https://i.dummyjson.com/data/products/10/2.jpg",
+        "https://i.dummyjson.com/data/products/10/3.jpg",
+        "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
+      ],
+      "quantity": 1,
+      "user": 2,
+      "id": 1
+    }
+  ],
   "orders": [
     {
       "items": [
