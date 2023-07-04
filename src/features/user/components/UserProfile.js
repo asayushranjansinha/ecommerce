@@ -11,7 +11,6 @@ export default function UserProfile() {
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
     formState: { errors },
   } = useForm();
