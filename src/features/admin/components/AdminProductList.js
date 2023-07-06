@@ -20,7 +20,7 @@ import {
   selectBrands,
   fetchBrandsAsync,
   fetchCategoriesAsync,
-} from "../productSlice";
+} from "../../product/productSlice";
 import { ITEMS_PER_PAGE } from "../../../app/constants";
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
@@ -36,7 +36,7 @@ function truncate(str) {
 }
 
 // MAIN COMPONENT : PRODUCT LIST
-const ProductList = () => {
+const AdminProductList = () => {
   //  Dispatch functions used below
   const dispatch = useDispatch();
 
@@ -127,20 +127,24 @@ const ProductList = () => {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              All Products
+              New Arrivals
             </h1>
 
             <div className="flex items-center">
+              <Link
+                to={"/admin/product-form"}
+                className="py-1 px-3 mx-2 text-sm font-semibold text-white bg-green-600 items-center rounded-md hover:bg-green-500"
+              >
+                Add New Item
+              </Link>
               <Menu as="div" className="relative inline-block text-left">
-                <div>
-                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                    Sort
-                    <ChevronDownIcon
-                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                      aria-hidden="true"
-                    />
-                  </Menu.Button>
-                </div>
+                <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                  Sort
+                  <ChevronDownIcon
+                    className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                    aria-hidden="true"
+                  />
+                </Menu.Button>
 
                 <Transition
                   as={Fragment}
@@ -219,7 +223,7 @@ const ProductList = () => {
     </div>
   );
 };
-export default ProductList;
+export default AdminProductList;
 
 // MOBILE VIEW COMPONENT
 function MobileFilter({
@@ -406,15 +410,11 @@ function ProductGrid({ products }) {
     <div className="lg:col-span-3">
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            Customers also purchased
-          </h2>
-
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
             {products.map((product) => (
-              <Link to={`product-detail/${product.id}`} key={product.id}>
+              <div key={product.id} id={`product-detail-${product.id}`}>
                 <ProductCard product={product} />
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -516,23 +516,26 @@ function Pagination({ handlePage, setpage, page, totalItems }) {
   );
 }
 
-// PRODUCT CARD
 const ProductCard = ({ product }) => {
   return (
+    // container
     <div className="max-w-xs h-full rounded overflow-hidden shadow-lg mx-auto flex flex-col justify-between ">
-      <img
-        className="w-full h-60 object-center"
-        src={product.thumbnail}
-        alt="Product"
-      />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{product.title}</div>
-        <p className="text-gray-700 text-base">
-          {truncate(String(product.description))}
-        </p>
-      </div>
-      <div className="px-6 py-4 space-y-2">
-        <div className="flex justify-between items-center ">
+      {/* upper  */}
+      <Link to={`/admin/product-detail/${product.id}`}>
+        {/* image */}
+        <img
+          className="w-full h-60 object-center"
+          src={product.thumbnail}
+          alt="Product"
+        />
+        {/* text */}
+        <div className="px-4 py-2">
+          <h3 className="font-bold text-xl mb-2">{product.title}</h3>
+          <p className="text-gray-700 text-base">
+            {truncate(String(product.description))}
+          </p>
+        </div>
+        <div className="flex justify-between items-center px-4 py-2 ">
           <div className="bg-green-700 rounded-sm px-2 flex py-1 items-center gap-1">
             <StarIcon className="w-4 h-4 text-white"></StarIcon>
             <span className="text-sm font-bold text-white">
@@ -551,11 +554,23 @@ const ProductCard = ({ product }) => {
             </span>
           </div>
         </div>
-        <div className="flex justify-center bg-blue-600 items-center rounded-md hover:bg-blue-500">
-          <button className="py-1 text-sm font-semibold text-white ">
-            Add to Cart
+      </Link>
+
+      {/* lower */}
+      <div className="flex justify-between items-center px-4 py-2">
+        <Link
+          id={`edit-product-${product.id}`}
+          to={`/admin/product-form/edit/${product.id}`}
+        >
+          <button className="py-1 text-sm font-semibold text-blue-700">
+            Edit
           </button>
-        </div>
+        </Link>
+        {product.delete && (
+          <span className="py-1 text-sm font-semibold text-red-700">
+            Product Deleted
+          </span>
+        )}
       </div>
     </div>
   );

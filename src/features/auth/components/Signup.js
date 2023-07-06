@@ -15,7 +15,6 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
-
   return (
     <>
       {user && <Navigate to="/" replace={true}></Navigate>}
@@ -41,6 +40,7 @@ export default function Signup() {
                   email: data.email,
                   password: data.password,
                   addresses: [],
+                  role: "user",
                 })
               );
             })}

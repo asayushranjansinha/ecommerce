@@ -50,6 +50,11 @@ export default function UserProfile() {
         <h3 className="text-xl font-bold tracking-tight text-red-900">
           Email address : {user.email}
         </h3>
+        {user.role === "admin" && (
+          <h3 className="text-xl font-bold tracking-tight text-gray-900">
+            Role: {user.role}
+          </h3>
+        )}
       </section>
 
       {/* Update address form section */}
