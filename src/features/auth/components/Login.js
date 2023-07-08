@@ -3,7 +3,7 @@ import { selectError, selectLoggedInUser } from "../authSlice";
 import { Link, Navigate } from "react-router-dom";
 import { checkUserAsync } from "../authSlice";
 import { useForm } from "react-hook-form";
-
+import LOGO from "../../../assets/storeLogo.png";
 export default function Login() {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
@@ -14,17 +14,12 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-
   return (
     <>
       {user && <Navigate to="/" replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
+          <img className="mx-auto h-20 w-auto" src={LOGO} alt="Your Company" />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Log in to your account
           </h2>
@@ -58,7 +53,7 @@ export default function Login() {
                     },
                   })}
                   type="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.email && (
                   <p className="text-red-500">{errors.email.message}</p>
@@ -76,7 +71,7 @@ export default function Login() {
                 </label>
                 <div className="text-sm">
                   <Link
-                    to={'/forgot-password'}
+                    to={"/forgot-password"}
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
@@ -90,7 +85,7 @@ export default function Login() {
                     required: "password is required",
                   })}
                   type="password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.password && (
                   <p className="text-red-500">{errors.password.message}</p>
@@ -119,6 +114,7 @@ export default function Login() {
             </Link>
           </p>
         </div>
+        
       </div>
     </>
   );

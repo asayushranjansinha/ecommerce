@@ -11,7 +11,7 @@ import CartPage from "./pages/CartPage";
 import PageNotFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import UserOrdersPage from "./pages/UserOrdersPage";
-import Checkout from "./pages/Checkout";
+import CheckoutPage from "./pages/CheckoutPage";
 import MyProfile from "./pages/MyProfile";
 import Logout from "./features/auth/components/Logout";
 
@@ -21,7 +21,7 @@ import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import AdminProductDetail from "./features/admin/components/AdminProductDetail";
 
 // Dependencies
-import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Protected from "./features/auth/components/Protected";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,7 @@ import { selectLoggedInUser } from "./features/auth/authSlice";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import { fetchLoggedInUserAsync } from "./features/user/userSlice";
 import AdminProductFormPage from "./pages/AdminProductFormPage";
+import AdminOrdersPage from "./pages/AdminOrdersPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -66,7 +67,7 @@ const router = createBrowserRouter([
     path: "/checkout",
     element: (
       <Protected>
-        <Checkout></Checkout>
+        <CheckoutPage></CheckoutPage>
       </Protected>
     ),
   },
@@ -83,6 +84,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedAdmin>
         <AdminProductDetail></AdminProductDetail>
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/orders",
+    element: (
+      <ProtectedAdmin>
+        <AdminOrdersPage></AdminOrdersPage>
       </ProtectedAdmin>
     ),
   },

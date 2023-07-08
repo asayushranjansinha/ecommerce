@@ -1,7 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+// import dependencies
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon, StarIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -9,8 +9,9 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+// APIs
 import {
   selectAllProducts,
   fetchProductsByFiltersAsync,
@@ -20,8 +21,13 @@ import {
   fetchBrandsAsync,
   fetchCategoriesAsync,
 } from "../productSlice";
-import { ITEMS_PER_PAGE } from "../../../app/constants";
+
+// constants and components
 import Pagination from "../../shared/Pagination";
+import ProductCard from "../../shared/ProductCard";
+import { ITEMS_PER_PAGE } from '../../../app/constants';
+
+
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
   { name: "Price: Low to High", sort: "price", order: "asc", current: false },
@@ -30,9 +36,6 @@ const sortOptions = [
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
-}
-function truncate(str) {
-  return str.length > 50 ? str.substring(0, 50) + "..." : str;
 }
 
 // MAIN COMPONENT : PRODUCT LIST
@@ -112,7 +115,7 @@ const ProductList = () => {
   useEffect(() => {
     dispatch(fetchBrandsAsync());
     dispatch(fetchCategoriesAsync());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="bg-white">
       <div>
@@ -127,7 +130,7 @@ const ProductList = () => {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              All Products
+              New Launches
             </h1>
 
             <div className="flex items-center">
@@ -405,15 +408,14 @@ function ProductGrid({ products }) {
     <div className="lg:col-span-3">
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            Customers also purchased
-          </h2>
-
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
             {products.map((product) => (
-              <Link to={`product-detail/${product.id}`} key={product.id}>
-                <ProductCard product={product} />
-              </Link>
+              <div key={product.id}>
+                <ProductCard
+                  product={product}
+                  link={`/product-detail/${product.id}`}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -421,48 +423,3 @@ function ProductGrid({ products }) {
     </div>
   );
 }
-
-// PRODUCT CARD
-const ProductCard = ({ product }) => {
-  return (
-    <div className="max-w-xs h-full rounded overflow-hidden shadow-lg mx-auto flex flex-col justify-between ">
-      <img
-        className="w-full h-60 object-center"
-        src={product.thumbnail}
-        alt="Product"
-      />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{product.title}</div>
-        <p className="text-gray-700 text-base">
-          {truncate(String(product.description))}
-        </p>
-      </div>
-      <div className="px-6 py-4 space-y-2">
-        <div className="flex justify-between items-center ">
-          <div className="bg-green-700 rounded-sm px-2 flex py-1 items-center gap-1">
-            <StarIcon className="w-4 h-4 text-white"></StarIcon>
-            <span className="text-sm font-bold text-white">
-              {product.rating}
-            </span>
-          </div>
-          <div className="space-x-1">
-            <span className="py-1 text-sm font-bold text-black">
-              ₹
-              {Math.round(
-                product.price * (1 - product.discountPercentage / 100)
-              )}
-            </span>
-            <span className="py-1 text-sm font-semibold line-through text-gray-700">
-              ₹{product.price}
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center bg-blue-600 items-center rounded-md hover:bg-blue-500">
-          <button className="py-1 text-sm font-semibold text-white ">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};

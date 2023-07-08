@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToCartAsync } from "../../cart/cartSlice";
 import { selectLoggedInUser } from "../../auth/authSlice";
+import { discountedPrice } from "../../../app/constants";
+
 const sizes = [
   { name: "XXS", inStock: false },
   { name: "XS", inStock: true },
@@ -140,10 +142,12 @@ export default function ProductDetail() {
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">
-                {product.price}
+              <p className="text-xl line-through tracking-tight text-gray-900">
+                ${product.price}
               </p>
-
+              <p className="text-3xl tracking-tight text-gray-900">
+                ${discountedPrice(product)}
+              </p>
               {/* Reviews */}
               <div className="mt-6">
                 <h3 className="sr-only">Reviews</h3>

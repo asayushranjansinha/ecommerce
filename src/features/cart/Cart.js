@@ -1,37 +1,34 @@
-import React, { useState, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import {
   deleteItemFromCartAsync,
   selectItems,
   updateCartAsync,
-} from './cartSlice';
-import { Dialog, Transition } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+} from "./cartSlice";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { discountedPrice } from "../../app/constants";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(true);
 
   const items = useSelector(selectItems);
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountedPrice(item) * item.quantity + amount,
     0
   );
+  console.log()
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
-
   const handleQuantity = (e, item) => {
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
   };
 
-  const handleRemove =(e, id)=>{
-    dispatch(deleteItemFromCartAsync(id))
-  }
+  const handleRemove = (e, id) => {
+    dispatch(deleteItemFromCartAsync(id));
+  };
 
   return (
     <>
-      {!items.length && <Navigate to='/' replace={true}></Navigate>}
+      {!items.length && <Navigate to="/" replace={true}></Navigate>}
 
       <div>
         <div className="mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -40,7 +37,7 @@ export default function Cart() {
               Cart
             </h1>
             <div className="flow-root">
-              <ul role="list" className="-my-6 divide-y divide-gray-200">
+              <ul className="-my-6 divide-y divide-gray-200">
                 {items.map((item) => (
                   <li key={item.id} className="flex py-6">
                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -58,6 +55,7 @@ export default function Cart() {
                             <a href={item.href}>{item.title}</a>
                           </h3>
                           <p className="ml-4">${item.price}</p>
+                          <p className="ml-4">${discountedPrice(item)}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
                           {item.brand}
@@ -71,7 +69,10 @@ export default function Cart() {
                           >
                             Qty
                           </label>
-                          <select onChange={(e) => handleQuantity(e, item)} value={item.quantity}>
+                          <select
+                            onChange={(e) => handleQuantity(e, item)}
+                            value={item.quantity}
+                          >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -82,7 +83,7 @@ export default function Cart() {
 
                         <div className="flex">
                           <button
-                            onClick={e=>handleRemove(e,item.id)}
+                            onClick={(e) => handleRemove(e, item.id)}
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
@@ -114,12 +115,12 @@ export default function Cart() {
                 to="/checkout"
                 className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
-                Checkout
+                CheckoutPage
               </Link>
             </div>
             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
               <p>
-                or
+                or{" "}
                 <Link to="/">
                   <button
                     type="button"
