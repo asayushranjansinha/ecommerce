@@ -20,13 +20,14 @@ import {
   selectBrands,
   fetchBrandsAsync,
   fetchCategoriesAsync,
+  selectProductLoadingStatus,
 } from "../productSlice";
 
 // constants and components
 import Pagination from "../../shared/Pagination";
 import ProductCard from "../../shared/ProductCard";
-import { ITEMS_PER_PAGE } from '../../../app/constants';
-
+import LoadingPage from '../../shared/LoadingPage'
+import { ITEMS_PER_PAGE } from "../../../app/constants";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
@@ -48,7 +49,7 @@ const ProductList = () => {
   const totalItems = useSelector(selectTotalItems);
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);
-
+  const status = useSelector(selectProductLoadingStatus);
   // React State Hooks used in the component
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
@@ -118,6 +119,9 @@ const ProductList = () => {
   }, [dispatch]);
   return (
     <div className="bg-white">
+      {
+        status === 'loading' ? <LoadingPage/> : null
+      }
       <div>
         {/* Mobile filter dialog */}
         <MobileFilter

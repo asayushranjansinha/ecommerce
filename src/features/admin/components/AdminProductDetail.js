@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import {
@@ -8,10 +8,10 @@ import {
 } from "../../product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addToCartAsync } from "../../cart/cartSlice";
+import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import { selectLoggedInUser } from "../../auth/authSlice";
-import { discountedPrice } from '../../../app/constants';
-
+import { discountedPrice } from "../../../app/constants";
+import { toast } from "react-toastify";
 import Navbar from "../../nav/Navbar";
 const sizes = [
   { name: "XXS", inStock: false },
@@ -46,17 +46,35 @@ export default function AdminProductDetail() {
   const product = useSelector(selectProductById);
   const user = useSelector(selectLoggedInUser);
   const dispatch = useDispatch();
+  const toastId = useRef(null);
+  const items = useSelector(selectItems);
 
   const params = useParams();
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
   }, [dispatch, params.id]);
 
+  const notify = (message, type) => {
+    if (!toast.isActive(toastId.current)) {
+      toastId.current = toast(message, { type: type });
+    }
+  };
   const handleCart = (e) => {
     e.preventDefault();
-    const newItem = { ...product, quantity: 1, user: user.id };
-    delete newItem["id"];
-    dispatch(addToCartAsync(newItem));
+    if (items.findIndex((item) => item.productId === product.id) < 0) {
+      const newItem = {
+        ...product,
+        productId: product.id,
+        quantity: 1,
+        user: user.id,
+      };
+      delete newItem["id"];
+      // TODO: it will be based on server response from backend
+      dispatch(addToCartAsync(newItem));
+      notify("Item added to Cart", "success");
+    } else {
+      notify("Item Already in Cart", "error");
+    }
   };
 
   // TODO: In server data we will add colors, sizes, and highlights

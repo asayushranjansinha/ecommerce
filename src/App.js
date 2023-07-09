@@ -19,6 +19,8 @@ import Logout from "./features/auth/components/Logout";
 import AdminHome from "./pages/AdminHome";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import AdminProductDetail from "./features/admin/components/AdminProductDetail";
+import AdminProductFormPage from "./pages/AdminProductFormPage";
+import AdminOrdersPage from "./pages/AdminOrdersPage";
 
 // Dependencies
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -28,8 +30,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser } from "./features/auth/authSlice";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import { fetchLoggedInUserAsync } from "./features/user/userSlice";
-import AdminProductFormPage from "./pages/AdminProductFormPage";
-import AdminOrdersPage from "./pages/AdminOrdersPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -162,6 +165,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <RouterProvider router={router} />
     </div>
   );

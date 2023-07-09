@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import { selectLoggedInUser } from "../../auth/authSlice";
 import { discountedPrice } from "../../../app/constants";
+import { toast } from "react-toastify";
+import { useRef } from "react";
 
 const sizes = [
   { name: "XXS", inStock: false },
@@ -43,20 +45,33 @@ export default function ProductDetail() {
   const user = useSelector(selectLoggedInUser);
   const items = useSelector(selectItems);
   const dispatch = useDispatch();
+  const toastId = useRef(null);
 
   const params = useParams();
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
   }, [dispatch, params.id]);
 
+  const notify = (message, type) => {
+    if (!toast.isActive(toastId.current)) {
+      toastId.current = toast(message, { type: type });
+    }
+  };
   const handleCart = (e) => {
     e.preventDefault();
     if (items.findIndex((item) => item.productId === product.id) < 0) {
-      const newItem = { ...product, productId:product.id, quantity: 1, user: user.id };
+      const newItem = {
+        ...product,
+        productId: product.id,
+        quantity: 1,
+        user: user.id,
+      };
       delete newItem["id"];
+      // TODO: it will be based on server response from backend
       dispatch(addToCartAsync(newItem));
+      notify("Item added to Cart", "success");
     } else {
-      console.log("item already in cart");
+      notify("Item Already in Cart", "error");
     }
   };
 
