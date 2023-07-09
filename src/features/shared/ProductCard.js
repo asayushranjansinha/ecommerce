@@ -12,7 +12,7 @@ const ProductCard = ({ product, link }) => {
     // container
     <div className="max-w-xs h-full rounded overflow-hidden shadow-lg mx-auto flex flex-col justify-between ">
       {/* upper  */}
-      <Link  to={link}>
+      <Link to={link}>
         {/* image */}
         <img
           className="w-full h-60 object-center"
@@ -35,8 +35,7 @@ const ProductCard = ({ product, link }) => {
           </div>
           <div className="space-x-1">
             <span className="py-1 text-sm font-bold text-black">
-              ₹
-              {discountedPrice(product)}
+              ₹{discountedPrice(product)}
             </span>
             <span className="py-1 text-sm font-semibold line-through text-gray-700">
               ₹{product.price}
@@ -47,9 +46,15 @@ const ProductCard = ({ product, link }) => {
 
       {/* Add to cart */}
       <div className="px-4 py-2">
-        <button className="w-full bg-blue-600 items-center rounded-md hover:bg-blue-500 py-1 text-sm font-semibold text-white ">
-          Add to Cart
-        </button>
+        {product.stock === 0 ? (
+          <span className="py-1 text-sm font-semibold text-red-700">
+            Out of Stock
+          </span>
+        ) : (
+          <button className="w-full bg-blue-600 items-center rounded-md hover:bg-blue-500 py-1 text-sm font-semibold text-white ">
+            Add to Cart
+          </button>
+        )}
       </div>
       {user?.role === "admin" && (
         <div className="flex justify-between items-center px-4 py-2">

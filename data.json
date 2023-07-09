@@ -7,7 +7,7 @@
       "price": 444,
       "discountPercentage": 10.68,
       "rating": 4.69,
-      "stock": 752,
+      "stock": 0,
       "brand": "Apple",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
@@ -27,7 +27,7 @@
       "price": 898,
       "discountPercentage": 35.88,
       "rating": 4.44,
-      "stock": 68,
+      "stock": 0,
       "brand": "Apple",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
@@ -2457,23 +2457,21 @@
   ],
   "cart": [
     {
-      "title": "Huawei P30",
-      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-      "price": 499,
-      "discountPercentage": 10.58,
+      "title": "Samsung Universe 9",
+      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+      "price": 1249,
+      "discountPercentage": 15.46,
       "rating": 4.09,
-      "stock": 32,
-      "brand": "Huawei",
+      "stock": 36,
+      "brand": "Samsung",
       "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
+      "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
       "images": [
-        "https://i.dummyjson.com/data/products/5/1.jpg",
-        "https://i.dummyjson.com/data/products/5/2.jpg",
-        "https://i.dummyjson.com/data/products/5/3.jpg"
+        "https://i.dummyjson.com/data/products/3/1.jpg"
       ],
-      "productId": 5,
+      "productId": 3,
       "quantity": 1,
-      "user": 3,
+      "user": 2,
       "id": 1
     }
   ],
